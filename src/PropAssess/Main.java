@@ -20,7 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(
-                "DataTableFXML.fxml"));
+                "PropAssessProgramFXML.fxml"));
         Scene scene = new Scene(root);
         // window title
         stage.setTitle("Edmonton Property Assessments");

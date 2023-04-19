@@ -1,29 +1,68 @@
 package PropAssess;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.*;
 
 /**
  * Class contains variety of methods to compute descriptive statistics
+ * Also provides a method to automatically compute and store descriptive 
+ * statistics
  * 
  * @author Group 4
  */
 public class Statistics {
+    public int n;
+    public double min;
+    public double max;
+    public double mean;
+    public double range;
+    public double stdDev;
+    public double median;
     
     /**
      * Collects all statistical methods under one method
      * 
      * @param data data to compute statistics from
-     * @return list of statistics
      */
-    public static List<Double> descriptives(List<Double> data){
-        ArrayList<Double> descriptives = new ArrayList<>();
-        descriptives.add(min(data));
-        descriptives.add(max(data));
-        descriptives.add(range(data));
-        descriptives.add(mean(data));
-        descriptives.add(stdDev(data));
-        descriptives.add(median(data));
-        return descriptives;
+    public final void updateStats(List<Double> data){
+        n = getN(data);
+        min = min(data);
+        max = max(data);
+        range = range(data);
+        mean = mean(data);
+        stdDev = stdDev(data);
+        median = median(data);
+    }
+    
+    /**
+     * Creates a formatted statistics string.
+     *
+     * @return formatted string with all the descriptive statistics
+     */
+    @Override
+    public String toString() {
+
+        DecimalFormat formatter = new DecimalFormat("#,###"); //format for nums
+        formatter.setRoundingMode(RoundingMode.HALF_UP);
+        StringBuilder sb = new StringBuilder();
+        //print stats
+        sb.append("Number of properties: ");
+        sb.append(formatter.format(n));
+        sb.append("\n\rMin: $");
+        sb.append(formatter.format(min));
+        sb.append("\n\rMax: $");
+        sb.append(formatter.format(max));
+        sb.append("\n\rRange: $");
+        sb.append(formatter.format(range));
+        sb.append("\n\rMean: $");
+        sb.append(formatter.format(mean));
+        sb.append("\n\rMedian: $");
+        sb.append(formatter.format(median));
+        sb.append("\n\rStandard Deviation: $");
+        sb.append(formatter.format(stdDev));
+
+        return sb.toString();
     }
     
     /**

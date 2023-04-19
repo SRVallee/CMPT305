@@ -20,6 +20,7 @@ public class Data{
     private Location location;
     private double[] propertyPercent;
     private String[] propertyClass;
+    private String ward;
     
     /**
      * Constructor that interprets a String line of CSV.
@@ -28,7 +29,7 @@ public class Data{
      */
     public Data(String lineCSV){
          //split line by commas
-        String[] line = lineCSV.split(",");
+        String[] line = lineCSV.split(",", -1);
         
         //account number
         accountNumber = Integer.parseInt(line[0]);
@@ -36,7 +37,7 @@ public class Data{
         //address
         if(!line[1].isEmpty()){ //if a suite exists
             //init address with suite
-            address = new Address(line[1], line[2], line[3]); 
+            address = new Address(line[1], line[2], line[3]);
 
         //unless a house number or street number do not exist
         } else if (!line[2].isEmpty() && !line[3].isEmpty()){
@@ -48,14 +49,37 @@ public class Data{
         garage = line[4].equalsIgnoreCase("Y");
 
         //neighbourhood (includes id, neighbourhood name, and ward)
-        neighbourhood = new Neighbourhood(line[5], line[6], line[7]);
+        String[] neighbourStrs = new String[3];
+        for (int i = 5; i < 8 ; i++){
+            String currStr = line[i];
+            if (currStr.isEmpty()){
+                neighbourStrs[i-5] = "";
+            } else {
+                neighbourStrs[i-5] = currStr;
+            }
+        }
+        neighbourhood = new Neighbourhood(neighbourStrs[0], 
+                neighbourStrs[1], neighbourStrs[2]);
+        
         
         //assessed property value
         value = Double.parseDouble(line[8]);
         
         //location
-        double latitude = Double.parseDouble(line[9]);
-        double longitude = Double.parseDouble(line[10]);
+        double latitude;
+        if (line[9].isEmpty()){
+             latitude = 53.5461;
+        } else {
+            latitude = Double.parseDouble(line[9]);
+        }
+        
+        double longitude;
+        if (line[10].isEmpty()){
+            longitude = -113.4938;
+        } else {
+            longitude = Double.parseDouble(line[10]);
+        }
+        
         location = new Location(latitude, longitude);
         
         //property percentage
@@ -98,14 +122,9 @@ public class Data{
         value = clone.value;
         location = clone.location;
         propertyPercent = new double[3];
-        for (int i = 0; i < 3; i++){
-            propertyPercent[i] = clone.propertyPercent[i];
-            
-        }
+        System.arraycopy(clone.propertyPercent, 0, propertyPercent, 0, 3);
         propertyClass = new String[3];
-        for (int i = 0; i < 3; i++){
-            propertyClass[i] = clone.propertyClass[i];
-        }
+        System.arraycopy(clone.propertyClass, 0, propertyClass, 0, 3);
     }
     
     /**
@@ -183,6 +202,14 @@ public class Data{
      */
     public Address getAddress() {
         return address;
+    }
+    
+    
+    /**
+     * @return ward of property 
+     */
+    public String getWard() {
+        return ward;
     }
     
     /**

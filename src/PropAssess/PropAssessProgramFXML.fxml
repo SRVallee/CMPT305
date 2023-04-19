@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="800.0" minWidth="1400.0" prefHeight="800.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PropAssess.PropAssessProgramFXMLController">
+   <children>
+      <SplitPane dividerPositions="0.2565130260521042" prefHeight="800.0" prefWidth="1200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <items>
+          <AnchorPane maxWidth="300.0" minHeight="500.0" minWidth="300.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <VBox prefHeight="798.0" prefWidth="304.0" spacing="3.0">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                     </padding>
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="228.0" text="Find Property Assessment">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="20.0" layoutY="304.0" prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <Label prefHeight="26.0" prefWidth="185.0" text="File 1:">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="10.0" layoutY="10.0" prefHeight="26.0" prefWidth="228.0" text="File 2:">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox prefWidth="200.0" spacing="5.0">
+                           <children>
+                              <ChoiceBox fx:id="file1Dropdown" prefWidth="150.0" />
+                              <ChoiceBox fx:id="file2Dropdown" layoutX="10.0" layoutY="10.0" prefWidth="150.0" />
+                              <Button minWidth="47.0" mnemonicParsing="false" onAction="#loadButtonHandler" prefHeight="25.0" prefWidth="0.0" text="Load" />
+                           </children>
+                        </HBox>
+                        <Label layoutX="20.0" layoutY="10.0" prefHeight="26.0" prefWidth="228.0" text="Account Number:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="accountField" />
+                        <Label layoutX="20.0" layoutY="39.0" prefHeight="26.0" prefWidth="228.0" text="Address (#suite #house street):">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="addressField" layoutX="20.0" layoutY="68.0" />
+                        <Label layoutX="20.0" layoutY="96.0" prefHeight="26.0" prefWidth="228.0" text="Neighbourhood:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="neighbourField" layoutX="20.0" layoutY="125.0" />
+                        <Label layoutX="20.0" layoutY="153.0" prefHeight="26.0" prefWidth="228.0" text="Assessment Class:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <ChoiceBox fx:id="classDropdown" prefWidth="150.0" />
+                        <HBox prefHeight="34.0" prefWidth="289.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonHandler" text="Search" />
+                              <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetButtonHandler" text="Reset" />
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </HBox>
+                        <TextArea fx:id="statsArea1" prefHeight="198.0" prefWidth="284.0">
+                           <opaqueInsets>
+                              <Insets top="1.0" />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin>
+                        </TextArea>
+                        <TextArea fx:id="statsArea2" layoutX="20.0" layoutY="361.0" prefHeight="198.0" prefWidth="284.0">
+                           <opaqueInsets>
+                              <Insets top="1.0" />
+                           </opaqueInsets>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </TextArea>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+               <children>
+                  <TabPane fx:id="tabWindow" prefHeight="798.0" prefWidth="888.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                      <Tab fx:id="tableTab" closable="false" onSelectionChanged="#tabSwitchHandler" text="Data Table">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox fx:id="tableVBox" spacing="5.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <padding>
+                                          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab fx:id="pieTab" closable="false" onSelectionChanged="#tabSwitchHandler" text="Pie Chart">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="670.0" prefWidth="1078.0">
+                                       <children>
+                                          <HBox prefHeight="342.0" prefWidth="1078.0" spacing="10.0">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                             <children>
+                                                <PieChart fx:id="allneighbourhoodsPieChart" prefHeight="347.0" prefWidth="184.0" />
+                                                <PieChart fx:id="neighbourhoodPieChart" prefHeight="347.0" prefWidth="175.0" />
+                                                <PieChart fx:id="assessmentClassPieChart" prefHeight="347.0" prefWidth="223.0" />
+                                                <PieChart fx:id="garagePieChart" />
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="360.0" prefWidth="880.0">
+                                             <children>
+                                                <PieChart fx:id="allneighbourhoodsPieChart2" prefHeight="400.0" prefWidth="265.0" />
+                                                <PieChart fx:id="neighbourhoodPieChart2" prefHeight="400.0" prefWidth="223.0" />
+                                                <PieChart fx:id="assessmentClassPieChart2" prefHeight="400.0" prefWidth="251.0" />
+                                                <PieChart fx:id="garagePieChart2" />
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab fx:id="scatterTab" closable="false" onSelectionChanged="#tabSwitchHandler" text="Scatter Plot">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <LineChart fx:id="LinePlot" prefHeight="740.0" prefWidth="752.0">
+                                      <xAxis>
+                                        <CategoryAxis fx:id="scatterX" side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis fx:id="scatterY" side="LEFT" />
+                                      </yAxis>
+                                    </LineChart>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="barTab" closable="false" onSelectionChanged="#tabSwitchHandler" text="Bar Chart">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="700.0" prefWidth="999.0">
+                                       <children>
+                                          <HBox prefHeight="350.0" prefWidth="1000.0">
+                                             <children>
+                                                <BarChart fx:id="valueByClassChart" prefHeight="398.0" prefWidth="298.0">
+                                                  <xAxis>
+                                                    <CategoryAxis side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis side="LEFT" />
+                                                  </yAxis>
+                                                </BarChart>
+                                                <BarChart fx:id="propertiesByGarageChart" prefHeight="346.0" prefWidth="298.0">
+                                                  <xAxis>
+                                                    <CategoryAxis side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis side="LEFT" />
+                                                  </yAxis>
+                                                </BarChart>
+                                                <BarChart fx:id="propertiesByWardChart" prefHeight="346.0" prefWidth="382.0">
+                                                  <xAxis>
+                                                    <CategoryAxis side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis side="LEFT" />
+                                                  </yAxis>
+                                                </BarChart>
+                                             </children>
+                                          </HBox>
+                                          <HBox prefHeight="350.0" prefWidth="1000.0">
+                                             <children>
+                                                <BarChart fx:id="valueByClassChart2" prefHeight="346.0" prefWidth="298.0">
+                                                  <xAxis>
+                                                    <CategoryAxis side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis side="LEFT" />
+                                                  </yAxis>
+                                                </BarChart>
+                                                <BarChart fx:id="propertiesByGarageChart2" prefHeight="346.0" prefWidth="298.0">
+                                                  <xAxis>
+                                                    <CategoryAxis side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis side="LEFT" />
+                                                  </yAxis>
+                                                </BarChart>
+                                                <BarChart fx:id="valueByWardChart" prefHeight="346.0" prefWidth="382.0">
+                                                  <xAxis>
+                                                    <CategoryAxis side="BOTTOM" />
+                                                  </xAxis>
+                                                  <yAxis>
+                                                    <NumberAxis side="LEFT" />
+                                                  </yAxis>
+                                                </BarChart>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="histogramTab" closable="false" onSelectionChanged="#tabSwitchHandler" text="Histogram">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox fx:id="histogramVBox" prefHeight="711.0" prefWidth="907.0" spacing="5.0">
+                                       <padding>
+                                          <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

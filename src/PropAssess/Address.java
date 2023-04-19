@@ -17,7 +17,7 @@ public class Address {
      * 
      * @param suite suite of address
      * @param houseNumber house number of address
-     * @param streetName 
+     * @param streetName street name of address
      */
     public Address(String suite, String houseNumber, String streetName) {
         this(houseNumber, streetName);
@@ -48,7 +48,7 @@ public class Address {
         if (suite != null){
             strAddress += suite + " ";
         }
-        
+        // otherwise return house number and street address
         strAddress += houseNumber + " " + streetName;
         return strAddress;
     }

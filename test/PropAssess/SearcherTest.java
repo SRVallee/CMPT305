@@ -4,8 +4,6 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -121,7 +119,7 @@ public class SearcherTest {
         int accountNumber = 1;
         Searcher instance = s;
         int expResult = list.get(0).getAccountNumber();
-        int result = instance.getAccount(accountNumber).getAccountNumber();
+        int result = instance.getAssessmentAccount(accountNumber).getAccountNumber();
         assertEquals(expResult, result);
     }
 
@@ -134,7 +132,7 @@ public class SearcherTest {
         String substring = "";
         List<Data> subset = list;
         List<Data> expResult = null;
-        List<Data> result = Searcher.getAddresses(substring, subset);
+        List<Data> result = Searcher.getAssessmentAddresses(substring, subset);
         assertEquals(expResult, result);
     }
 
@@ -147,7 +145,7 @@ public class SearcherTest {
         String neighbourhoodName = "Meadowlark";
         List<Data> subset = list;
         int expResult = 1;
-        List<Data> resultList = Searcher.getNeighbourhood(neighbourhoodName, subset);
+        List<Data> resultList = Searcher.getAssessmentNeighbourhood(neighbourhoodName, subset);
         assertEquals(resultList.size(), 1);
         int result = resultList.get(0).getAccountNumber();
         assertEquals(expResult, result);
@@ -195,27 +193,6 @@ public class SearcherTest {
         int expResult = list.size();
         List<Data> result = instance.getData();
         assertEquals(result.size(), 2);
-    }
-
-    /**
-     * Test of getStatsString method, of class Searcher.
-     */
-    @Test
-    public void testGetStatsString() {
-        System.out.println("getStatsString");
-        List<Data> subset = list;
-        String expResult = 
-        "Statistics of Assessed Values:\n"
-        + "\n\rNumber of properties: "
-        + "\n\rMin: $9,999"
-        + "\n\rMax: $304,000"
-        + "\n\rRange: $294001"
-        + "\n\rMean: $1567000"
-        + "\n\rMedian: $157000"
-        + "\n\rStandard Deviation: $147001";
-        
-        String result = Searcher.getStatsString(subset);
-        assertEquals(expResult, result);
     }
     
 }
